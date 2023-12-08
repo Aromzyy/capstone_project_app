@@ -41,7 +41,7 @@ def predict():
     if img.mode != 'RGB':
         img = img.convert('RGB')
 
-    img = transform(img).unsqueeze(0)  # Make sure this transform is the same as used during training
+    img = transform(img).unsqueeze(0)  # transform is the same as used during training
 
     with torch.no_grad():
         outputs = model(img)

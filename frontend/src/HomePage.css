@@ -1,0 +1,53 @@
+/* HomePage.css */
+/* HomePage.css */
+
+.video-overlay-container {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .background-video {
+    width: 100%;
+    height: auto;
+  }
+  
+  .overlay-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    text-align: center;
+  }
+  
+  .info-panel {
+    background-color: #013220; /* Or any other color */
+    color: white; /* For the text */
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .conditions-list {
+    padding: 20px;
+    text-align: left;
+  }
+  
+  .conditions-list > .MuiTypography-body1 {
+    border-bottom: 1px solid white;
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+    display: block;
+  }
+  
+  .learn-more-button {
+    margin-top: 20px;
+    border-color: white; /* If you want a white border */
+    color: white; /* For the button text */
+  }
+  
+  .disclaimer-text {
+    color: white; /* If your background is dark, choose a light color for the text */
+    margin-top: 20px; /* Spacing from the button above */
+    font-size: '0.75rem'; /* Adjust the size as needed */
+    text-align: 'center'; /* Center the text if you like */
+  }

@@ -3,14 +3,14 @@ import torch.nn as nn
 from torchvision.models import mobilenet_v2
 import pandas as pd
 
-# ... other necessary imports ...
+
 
 # Define global mean and standard deviation constants used for normalization
 means = [0.485, 0.456, 0.406]
 stds = [0.229, 0.224, 0.225]
 
-# Load your CSV file
-csv_file = '/Users/aromaatieno/Downloads/Capstone_Project_App/data_science/DDI_Dataset/ddi_metadata.csv'
+# Load CSV file
+csv_file = '/Users/aromaatieno/Downloads/Capstone_Suppler_App 2/data_science/DDI_Dataset/ddi_metadata.csv'
 data = pd.read_csv(csv_file)
 
 # Extract unique disease labels from the 'disease' column
@@ -26,7 +26,7 @@ def get_model(num_classes):
     model.classifier[1] = nn.Linear(model.classifier[1].in_features, num_classes)
     return model
 
-# Ensure the following code only runs when the script is executed directly, not when imported
+# the following code only runs when the script is executed directly, not when imported
 if __name__ == "__main__":
-    # Put your training loop and any code that should only execute when training here
+    
     pass

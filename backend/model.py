@@ -130,7 +130,7 @@ train_indices, val_indices = train_test_split(indices, test_size=0.2, random_sta
 
 
 # Create data loaders for training and validation sets
-batch_size = 32  # Adjust as needed
+batch_size = 32  
 train_loader = DataLoader(torch.utils.data.Subset(custom_dataset, train_indices), batch_size=batch_size, shuffle=True)
 val_loader = DataLoader(torch.utils.data.Subset(custom_dataset, val_indices), batch_size=batch_size, shuffle=False)  # No need to shuffle the validation set
 
@@ -147,7 +147,7 @@ criterion = nn.CrossEntropyLoss()
 optimizer = optim.Adam(model.parameters(), lr=0.001)  # Adjust learning rate as needed
 
 # Training loop
-num_epochs = 10  # Adjust the number of training epochs as needed
+num_epochs = 10  
 
 for epoch in range(num_epochs):
     model.train()

@@ -64,7 +64,10 @@ function ImageUpload() {
           <form onSubmit={handleSubmit}>
             <label htmlFor="upload-button-file">
               <Input accept="image/*" id="upload-button-file" type="file" onChange={handleImageChange} />
-              <Button variant="contained" component="span">
+              <Button variant="contained" component="span"
+              sx={{ backgroundColor: '#013220', '&:hover': { backgroundColor: '#01231a' } }} 
+              
+              >
                 Upload
               </Button>
             </label>
@@ -73,14 +76,16 @@ function ImageUpload() {
               color="primary"
               type="submit"
               disabled={isLoading}
-              sx={{ ml: 2 }}
+              sx={{ ml: 2, backgroundColor: '#013220', '&:hover': { backgroundColor: '#01231a' } }}
             >
               Predict
             </Button>
           </form>
         </Box>
         {isLoading && (
-          <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
+          <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}
+          
+          >
             <CircularProgress />
           </Box>
         )}
