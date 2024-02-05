@@ -5,23 +5,22 @@ import React, { useState } from 'react';
 import { Button, Card, CardContent, Typography, CircularProgress, Box } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
-// Style the input file to hide it visually and replace it with a Material-UI Button
 const Input = styled('input')({
   display: 'none',
 });
 
 function ImageUpload() {
   const [image, setImage] = useState(null);
-  const [imageName, setImageName] = useState(''); // Add state to keep track of the image name
-  const [prediction, setPrediction] = useState('');
+  const [imageName, setImageName] = useState('');
+  const [predictions, setPredictions] = useState([]); // Use to store the list of predictions
   const [isLoading, setIsLoading] = useState(false);
-  const decorativeImageUrl = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShmsb1rFBcpAkcwi0Q_2HKIq433ESE8hZageiGvDjK1x-zJsvQ09Z5UroTcGTMKVgDlIs&usqp=CAU'; // Replace with your image path
+  const decorativeImageUrl = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShmsb1rFBcpAkcwi0Q_2HKIq433ESE8hZageiGvDjK1x-zJsvQ09Z5UroTcGTMKVgDlIs&usqp=CAU';
 
   const handleImageChange = (event) => {
     const file = event.target.files[0];
     if (file) {
       setImage(file);
-      setImageName(file.name); // Set the image name for display
+      setImageName(file.name);
     }
   };
 
@@ -46,10 +45,10 @@ function ImageUpload() {
       }
 
       const data = await response.json();
-      setPrediction(data.prediction);
+      setPredictions(data.prediction); // Adjust this line to handle the new structure
     } catch (error) {
       console.error('Error:', error);
-      setPrediction('Error predicting the disease.');
+      setPredictions([{ class_name: 'Error predicting the disease.', probability: 0 }]);
     }
     setIsLoading(false);
   };
@@ -58,16 +57,13 @@ function ImageUpload() {
     <Card sx={{ maxWidth: 345, height: 'auto', margin: 'auto', mt: 5, textAlign: 'center', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          Upload Files
+          Disease Prediction
         </Typography>
         <Box sx={{ mt: 2, mb: 2 }}>
           <form onSubmit={handleSubmit}>
             <label htmlFor="upload-button-file">
               <Input accept="image/*" id="upload-button-file" type="file" onChange={handleImageChange} />
-              <Button variant="contained" component="span"
-              sx={{ backgroundColor: '#013220', '&:hover': { backgroundColor: '#01231a' } }} 
-              
-              >
+              <Button variant="contained" component="span" sx={{ backgroundColor: '#013220', '&:hover': { backgroundColor: '#01231a' } }}>
                 Upload
               </Button>
             </label>
@@ -83,22 +79,31 @@ function ImageUpload() {
           </form>
         </Box>
         {isLoading && (
-          <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}
-          
-          >
+          <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
             <CircularProgress />
           </Box>
         )}
-        {prediction && <Typography mt={2}>Prediction: {prediction}</Typography>}
-        {imageName && <Typography variant="subtitle1" mt={2}>{imageName}</Typography>} {/* Display the image name */}
+        {!isLoading && predictions.length > 0 && (
+          <Box mt={2}>
+            <Typography>Based on our anaysis, we recommend that you seek a doctor's advice and diagnosis on the following conditions:</Typography>
+            {predictions.map((prediction, index) => (
+              <Typography key={index}>
+                <b>{prediction.class_name}</b>: {(prediction.probability * 100).toFixed(2)}%
+              </Typography>
+           
+              
+            ))}
+            <Typography> Please Remember that thease results are not conclusive as our aim is to help you understand your skin better</Typography>
+              
+          </Box>
+        )}
+        {imageName && !isLoading && <Typography variant="subtitle1" mt={2}>{imageName}</Typography>}
       </CardContent>
-      {!isLoading && !prediction && ( // Show the decorative image only when not loading or showing prediction
+      {!isLoading && predictions.length === 0 && (
         <img src={decorativeImageUrl} alt="Decorative" style={{ maxWidth: '100%', height: 'auto', marginTop: 'auto' }} />
       )}
     </Card>
   );
-
-  
 }
 
 export default ImageUpload;
