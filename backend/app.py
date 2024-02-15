@@ -72,7 +72,7 @@ from model1 import get_model, disease_to_index, index_to_disease
 # Load your trained model
 num_classes = len(disease_to_index)  # Get the number of classes from the disease_to_index mapping
 model = get_model(num_classes)
-model.load_state_dict(torch.load('DDI_model.pth', map_location=torch.device('cpu')))
+model.load_state_dict(torch.load('DDI1_model.pth', map_location=torch.device('cpu')))
 model.eval()
 
 app = Flask(__name__)

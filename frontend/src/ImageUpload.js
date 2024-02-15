@@ -85,7 +85,7 @@ function ImageUpload() {
         )}
         {!isLoading && predictions.length > 0 && (
           <Box mt={2}>
-            <Typography>Based on our anaysis, we recommend that you seek a doctor's advice and diagnosis on the following conditions:</Typography>
+            <Typography>Based on our analysis, we recommend that you seek a doctor's advice and diagnosis on the following conditions:</Typography>
             {predictions.map((prediction, index) => (
               <Typography key={index}>
                 <b>{prediction.class_name}</b>: {(prediction.probability * 100).toFixed(2)}%
@@ -93,7 +93,7 @@ function ImageUpload() {
            
               
             ))}
-            <Typography> Please Remember that thease results are not conclusive as our aim is to help you understand your skin better</Typography>
+            <Typography> Please Remember that these results are not conclusive as our aim is to help you understand your skin better</Typography>
               
           </Box>
         )}
